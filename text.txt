@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Countries Battle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .country {
+      font-size: 22px;
+      margin: 10px;
+      padding: 10px;
+      border: 2px solid white;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
+    }
+    .winner {
+      font-size: 26px;
+      font-weight: bold;
+      color: gold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌍 Countries Battle 🌍</h1>
+  <div id="scoreboard"></div>
+  <p class="winner" id="winnerMsg"></p>
+
+  <script>
+    // Χώρες και σκορ
+    const countries = {
+      "🇺🇸 USA": 0,
+      "🇹🇷 Turkey": 0,
+      "🇬🇷 Greece": 0,
+      "🇮🇹 Italy": 0,
+      "🇬🇧 UK": 0,
+      "🇦🇱 Albania": 0,
+      "🌙 Arab World": 0
+    };
+
+    const scoreboard = document.getElementById("scoreboard");
+    const winnerMsg = document.getElementById("winnerMsg");
+
+    // Εμφάνιση scoreboard
+    function renderScores() {
+      scoreboard.innerHTML = "";
+      for (const [country, score] of Object.entries(countries)) {
+        const div = document.createElement("div");
+        div.className = "country";
+        div.textContent = `${country}: ${score} points`;
+        scoreboard.appendChild(div);
+      }
+    }
+
+    renderScores();
+
+    // Προσθήκη πόντων (χειροκίνητα για demo)
+    // 🌹 Rose = +1, 🍩 Donut = +20, 🌸 Perfume = νίκη γύρου
+    function addPoints(country, gift) {
+      if (gift === "rose") countries[country] += 1;
+      else if (gift === "donut") countries[country] += 20;
+      else if (gift === "perfume") {
+        winnerMsg.textContent = `🏆 ${country} WINS this round with Perfume! 🌸`;
+      }
+      renderScores();
+    }
+
+    // 🔹 ΔΟΚΙΜΗ: πάτα στην κονσόλα για να δεις
+    // addPoints("🇬🇷 Greece", "rose");
+    // addPoints("🇮🇹 Italy", "donut");
+    // addPoints("🇹🇷 Turkey", "perfume");
+  </script>
+</body>
+</html>
